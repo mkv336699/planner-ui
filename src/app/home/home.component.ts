@@ -11,6 +11,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import * as mockData from '../../assets/mock_data.json';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Card {
   id: number;
@@ -34,7 +36,8 @@ interface Card {
     MatInputModule,
     MatSlideToggleModule,
     MatRadioModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatIconModule
   ]
 })
 export class HomeComponent {
@@ -53,7 +56,10 @@ export class HomeComponent {
     })
   });
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.cards = mockData.cards;
@@ -65,5 +71,9 @@ export class HomeComponent {
 
   onCreatePlanSubmit() {
     console.log("planGroup", this.planGroup.value);
+  }
+
+  onCardClick(card: any) {
+    this.router.navigate(["/plan/" + card.id]);
   }
 } 

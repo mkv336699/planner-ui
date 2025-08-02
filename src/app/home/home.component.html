@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-3 mt-4" *ngFor="let card of cards">
-            <div class="card shadow-sm h-100">
+            <div class="card shadow-sm h-100" (click)="onCardClick(card)">
                 <div class="card-body">
                     <h5 class="card-title">{{ card.title }}</h5>
                     <p class="card-text">{{ card.content }}</p>
