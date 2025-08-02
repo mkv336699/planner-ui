@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <div class="timeline-days">
+            <div class="timeline-days mleft-7">
                 <div class="day-marker" *ngFor="let day of getDaysArray(); let i = index"
                     [style.left.px]="i * dayWidth">
                     <div class="day-number">{{ i + 1 }}</div>
@@ -26,7 +26,7 @@
             <div class="timeline-content">
                 <div class="timeline-item" *ngFor="let day of getDaysArray(); let i = index"
                     [style.left.px]="i * dayWidth" [style.width.px]="dayWidth - 10">
-                    <div class="day-card">
+                    <div class="day-card cursor-pointer">
                         <h6>Day {{ i + 1 }}</h6>
                         <p>Add your plans here</p>
                     </div>
