@@ -1,5 +1,37 @@
-<div class="container">
-    <div class="row">
+<div class="canvas-container" #canvasContainer>
+    <div class="canvas" #canvas>
+        <!-- Timeline at center -->
+        <div class="timeline" [style.width.px]="timelineWidth">
+            <div class="timeline-header w-700">
+                <h3>{{ plan?.title }} Timeline</h3>
+                <div class="timeline-controls">
+                    <button matIconButton aria-label="Edit Plan">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button matIconButton aria-label="Edit Plan">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+            </div>
 
+            <div class="timeline-days">
+                <div class="day-marker" *ngFor="let day of getDaysArray(); let i = index"
+                    [style.left.px]="i * dayWidth">
+                    <div class="day-number">{{ i + 1 }}</div>
+                    <div class="day-line"></div>
+                </div>
+            </div>
+
+            <!-- Timeline content area -->
+            <div class="timeline-content">
+                <div class="timeline-item" *ngFor="let day of getDaysArray(); let i = index"
+                    [style.left.px]="i * dayWidth" [style.width.px]="dayWidth - 10">
+                    <div class="day-card">
+                        <h6>Day {{ i + 1 }}</h6>
+                        <p>Add your plans here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
