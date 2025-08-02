@@ -1,0 +1,29 @@
+{
+    "cards": [
+        {
+            "id": 1,
+            "title": "Japan",
+            "content": "This is the first card. You can drag, edit, or delete it."
+        },
+        {
+            "id": 2,
+            "title": "Sikkim",
+            "content": "This is the second card. Add more cards as needed."
+        },
+        {
+            "id": 3,
+            "title": "Euro trip",
+            "content": "Cards can be used for notes, tasks, or anything else."
+        },
+        {
+            "id": 4,
+            "title": "Fiji",
+            "content": "Try moving or editing this card."
+        },
+        {
+            "id": 5,
+            "title": "Italy",
+            "content": "Try moving or editing this card."
+        }
+    ]
+}

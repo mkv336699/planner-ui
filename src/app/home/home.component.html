@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row">
+        <div class="col-3 mt-4" *ngFor="let card of cards">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ card.title }}</h5>
+                    <p class="card-text">{{ card.content }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+<!-- Floating Add Button -->
+<button class="btn btn-primary fab" aria-label="Add" (click)="creatPlan()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path fill="currentColor"
+            d="M12 5c.552 0 1 .448 1 1v5h5a1 1 0 1 1 0 2h-5v5a1 1 0 1 1-2 0v-5H6a1 1 0 1 1 0-2h5V6c0-.552.448-1 1-1Z" />
+    </svg>
+</button>
+
+<ng-template #createPlanFormTpl>
+    <h2 mat-dialog-title>Create new Plan</h2>
+    <mat-dialog-content>
+        <form [formGroup]="planGroup" (ngSubmit)="onCreatePlanSubmit()">
+            <div class="row">
+                <div class="col-12 mt-2">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name">
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Type</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option value="vacation">Vacation Planner</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <mat-radio-group aria-label="Choose dates or days" formControlName="dateType">
+                        <mat-radio-button value="1">Date</mat-radio-button>
+                        <mat-radio-button value="2">Days</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="col-12 mt-2">
+                    @if (planGroup.get('dateType')?.value == '1') {
+                        <mat-form-field>
+                            <mat-label>Enter a date range</mat-label>
+                            <mat-date-range-input appearance="outline" formGroupName="dates" [rangePicker]="picker">
+                              <input matStartDate formControlName="startDate" placeholder="Start date">
+                              <input matEndDate formControlName="endDate" placeholder="End date">
+                            </mat-date-range-input>
+                            <mat-hint>DD/MM/YYYY - DD/MM/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                          
+                            @if (planGroup.controls.dates.controls.startDate.hasError('matStartDateInvalid')) {
+                              <mat-error>Invalid start date</mat-error>
+                            }
+                            @if (planGroup.controls.dates.controls.endDate.hasError('matEndDateInvalid')) {
+                              <mat-error>Invalid end date</mat-error>
+                            }
+                          </mat-form-field>
+                    } @else {
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Days</mat-label>
+                            <input matInput formControlName="name" type="number">
+                        </mat-form-field>
+                    }
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button matButton mat-dialog-close>Cancel</button>
+        <button matButton="filled" mat-dialog-close cdkFocusInitial color="primary" type="submit" (click)="onCreatePlanSubmit()" [disabled]="planGroup.invalid">Add</button>
+    </mat-dialog-actions>
+</ng-template>
