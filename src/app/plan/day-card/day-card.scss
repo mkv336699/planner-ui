@@ -1,0 +1,36 @@
+.day-card-modal {
+    min-width: 500px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-icon {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+.day-card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+mat-dialog-actions {
+    padding: 16px 0 0 0;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .day-card-modal {
+        min-width: 90vw;
+    }
+}

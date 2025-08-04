@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { DayCardModalComponent, DayCardData } from '../shared/day-card-modal.component';
+import { DayCardModalComponent, DayCardData } from './day-card/day-card';
 
 @Component({
   selector: 'app-plan',
