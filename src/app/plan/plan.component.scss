@@ -141,6 +141,23 @@
   font-size: 12px;
 }
 
+.day-alias {
+  font-weight: 600 !important;
+  color: #007bff !important;
+  font-size: 11px !important;
+  margin-bottom: 4px !important;
+}
+
+.day-content {
+  font-size: 11px !important;
+  line-height: 1.3 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 /* Zoom controls styling */
 .btn-sm {
   padding: 4px 8px;

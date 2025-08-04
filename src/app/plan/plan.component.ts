@@ -4,9 +4,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as mockData from '../../assets/mock_data.json';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DayCardModalComponent, DayCardData } from '../shared/day-card-modal.component';
 
 @Component({
   selector: 'app-plan',
@@ -14,7 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './plan.component.html',
   styleUrl: './plan.component.scss'
@@ -37,8 +40,12 @@ export class PlanComponent implements OnInit, OnDestroy, AfterViewInit {
   canvasOffsetX = 0;
   canvasOffsetY = 0;
 
+  // Day cards data
+  dayCards: { [key: number]: DayCardData } = {};
+
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -62,6 +69,27 @@ export class PlanComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  openDayCardModal(dayNumber: number) {
+    const existingData = this.dayCards[dayNumber] || { dayNumber, alias: '', content: '' };
+    
+    const dialogRef = this.dialog.open(DayCardModalComponent, {
+      data: existingData,
+      width: '600px',
+      maxWidth: '90vw'
+    });
+
+    dialogRef.afterClosed().subscribe((result: DayCardData | undefined) => {
+      if (result) {
+        this.dayCards[dayNumber] = result;
+        console.log('Day card saved:', result);
+      }
+    });
+  }
+
+  getDayCardData(dayNumber: number): DayCardData | null {
+    return this.dayCards[dayNumber] || null;
   }
 
   setupCanvas() {

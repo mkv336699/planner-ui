@@ -26,9 +26,19 @@
             <div class="timeline-content">
                 <div class="timeline-item" *ngFor="let day of getDaysArray(); let i = index"
                     [style.left.px]="i * dayWidth" [style.width.px]="dayWidth - 10">
-                    <div class="day-card cursor-pointer">
+                    <div class="day-card cursor-pointer" (click)="openDayCardModal(i + 1)">
                         <h6>Day {{ i + 1 }}</h6>
-                        <p>Add your plans here</p>
+                        <div *ngIf="getDayCardData(i + 1); else defaultContent">
+                            <p class="day-alias" *ngIf="getDayCardData(i + 1)?.alias">
+                                {{ getDayCardData(i + 1)?.alias }}
+                            </p>
+                            <p class="day-content" *ngIf="getDayCardData(i + 1)?.content">
+                                {{ getDayCardData(i + 1)?.content }}
+                            </p>
+                        </div>
+                        <ng-template #defaultContent>
+                            <p>Add your plans here</p>
+                        </ng-template>
                     </div>
                 </div>
             </div>
