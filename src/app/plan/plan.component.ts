@@ -33,7 +33,7 @@ export class PlanComponent implements OnInit, OnDestroy, AfterViewInit {
   // Canvas and timeline properties
   zoomLevel = 1;
   timelineWidth = 1200;
-  dayWidth = 200;
+  dayWidth = 300;
   isDragging = false;
   lastMouseX = 0;
   lastMouseY = 0;
